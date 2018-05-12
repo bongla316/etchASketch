@@ -1,6 +1,6 @@
 #container {
     margin: auto;
-    max-width: 700px;
+    width: 700px;
 }
 
 
@@ -11,7 +11,11 @@
   
 .col {
     border: 1px solid #000000;
+    border-collapse: collapse;
+    border-spacing: 0px;
     display: inline-block;
+    margin-left: -1px;
+    margin-top: -1px;
 }
 
 .coloured {
