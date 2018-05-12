@@ -3,9 +3,6 @@ function calculateBoxSize(size) {
     return Math.round(600/size);
 }
 
-
-
-
 function createDivs() {
     var container = document.getElementById("container");
     var i = 0;
@@ -20,8 +17,6 @@ function createDivs() {
         for (j=0; j < 16; j++) {
             var nodeData = document.createElement("div");
             nodeData.setAttribute("class", "col");
-            //var nodeText = document.createTextNode("   " + number + "   ");
-            //nodeData.appendChild(nodeText);
             nodeRow.appendChild(nodeData);
             number += 1;
         }
@@ -31,8 +26,15 @@ function createDivs() {
         setBorders.setAttribute('style', `height: ${calculateBoxSize(16)}px; width: ${calculateBoxSize(16)}px;`);
         setBorders.addEventListener("mouseenter", (e) => {
             e.target.className = "col coloured";
-        })
+        });
+    });
+}
+
+function clearGrid(){
+    document.querySelectorAll('.coloured').forEach(e => {
+        e.className = 'col';
     });
 }
 
 createDivs();
+document.querySelector('#clearGrid').addEventListener("click", clearGrid);
