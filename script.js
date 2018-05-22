@@ -30,7 +30,14 @@ function createDivs(gridSize) {
     document.querySelectorAll('.col').forEach(setBorders => {
         setBorders.setAttribute('style', `height: ${calculateBoxSize(gridSize)}px; width: ${calculateBoxSize(gridSize)}px;`);
         setBorders.addEventListener("mouseenter", (e) => {
-            e.target.className = "col coloured";
+            if (getColorStyle()=="grey"){
+                e.target.className = "col coloured";
+            }
+
+            else if (getColorStyle()=="rgb"){
+                e.target.className = "col coloured-rgb";
+                e.target.style.backgroundColor = randomColor();
+            }    
         });
     });
 }
@@ -39,6 +46,32 @@ function clearGrid(){
     document.querySelectorAll('.coloured').forEach(e => {
         e.className = 'col';
     });
+
+    document.querySelectorAll('.coloured-rgb').forEach(e => {
+        console.log("hello");
+        e.className = 'col';
+        e.style.backgroundColor = null;
+    });
+}
+
+function getColorStyle(){
+    var radios = document.getElementsByName("colorType");
+    var size = radios.length;
+    for (var i=0; i<size; i++){
+        if (radios[i].checked){
+            return radios[i].value;
+
+            break;
+        }
+    }
+}
+
+function randomColor(){
+    var r, g, b;
+    r = Math.floor(Math.random() * 256);
+    g = Math.floor(Math.random() * 256);
+    b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;
 }
 
 document.querySelector("#gridSizeSlider").addEventListener("input", function() {
@@ -46,3 +79,4 @@ document.querySelector("#gridSizeSlider").addEventListener("input", function() {
     document.getElementById("grid").innerHTML = "";
     createDivs(newGridSize);
 });
+
